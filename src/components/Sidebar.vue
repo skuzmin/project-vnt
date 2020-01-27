@@ -1,9 +1,9 @@
 <template>
     <v-navigation-drawer :mini-variant="isMiniMode" :app="isApp" permanent>
         <v-list-item @click.stop="openClose()">
-            <v-list-item-avatar>
-                <v-img src="https://randomuser.me/api/portraits/men/85.jpg"></v-img>
-            </v-list-item-avatar>
+            <v-btn icon v-if="isMiniMode">
+                <v-icon>mdi-chevron-right</v-icon>
+            </v-btn>
 
             <v-list-item-title>John Leider</v-list-item-title>
 
@@ -49,6 +49,8 @@
 </template>
 
 <script>
+import { OPEN_SIDEBAR_EVENT } from '../constants';
+
 export default {
     name: 'Sidebar',
     data() {
@@ -64,6 +66,7 @@ export default {
     methods: {
         openClose() {
             this.isMiniMode = !this.isMiniMode;
+            this.$root.$emit(OPEN_SIDEBAR_EVENT, this.isMiniMode);
         },
     },
 };
