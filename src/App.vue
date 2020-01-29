@@ -1,8 +1,14 @@
 <template>
     <div id="app">
-        <Sidebar />
-        <Titlebar />
-        <router-view />
+        <v-app>
+            <Sidebar />
+            <Titlebar />
+            <v-content class="pt-0">
+                <v-container fluid>
+                    <router-view />
+                </v-container>
+            </v-content>
+        </v-app>
     </div>
 </template>
 

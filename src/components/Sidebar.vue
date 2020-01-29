@@ -1,5 +1,5 @@
 <template>
-    <v-navigation-drawer :mini-variant="isMiniMode" :app="isApp" permanent>
+    <v-navigation-drawer :mini-variant="isMiniMode" app permanent>
         <v-list-item @click.stop="openClose()">
             <v-btn icon v-if="isMiniMode">
                 <v-icon>mdi-chevron-right</v-icon>
@@ -15,7 +15,12 @@
         <v-divider></v-divider>
 
         <v-list>
-            <v-list-item v-for="item in items" :key="item.title" link>
+            <v-list-item
+                v-for="item in items"
+                :key="item.title"
+                link
+                :to="item.link"
+            >
                 <v-list-item-icon>
                     <v-icon>{{ item.icon }}</v-icon>
                 </v-list-item-icon>
@@ -49,15 +54,17 @@
 </template>
 
 <script>
-import { OPEN_SIDEBAR_EVENT } from '../constants';
-
 export default {
     name: 'Sidebar',
     data() {
         return {
-            isApp: true,
             items: [
                 { title: 'Home', icon: 'mdi-home-city', link: '/dashboard' },
+                {
+                    title: 'Food & Drinks',
+                    icon: 'mdi-food-fork-drink',
+                    link: '/food-and-drinks',
+                },
                 { title: 'My Account', icon: 'mdi-account', link: '/about' },
             ],
             isMiniMode: true,
@@ -66,7 +73,6 @@ export default {
     methods: {
         openClose() {
             this.isMiniMode = !this.isMiniMode;
-            this.$root.$emit(OPEN_SIDEBAR_EVENT, this.isMiniMode);
         },
     },
 };

@@ -1,6 +1,5 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import Dashboard from '../views/Dashboard.vue';
 
 Vue.use(VueRouter);
 
@@ -12,14 +11,30 @@ const routes = [
     {
         path: '/dashboard',
         name: 'dashboard',
-        component: Dashboard,
+        component: () =>
+            import(
+                /* webpackChunkName: "dashboard" */ '../views/Dashboard.vue'
+            ),
+    },
+    {
+        path: '/food-and-drinks',
+        name: 'food-and-drinks',
+        component: () =>
+            import(
+                /* webpackChunkName: "food-and-drinks" */ '../views/FoodAndDrinks.vue'
+            ),
+    },
+    {
+        path: '/food-and-drinks/:id',
+        name: 'food-and-drinks-details',
+        component: () =>
+            import(
+                /* webpackChunkName: "food-and-drinks" */ '../views/FoodAndDrinksDetails.vue'
+            ),
     },
     {
         path: '/about',
         name: 'about',
-        // route level code-splitting
-        // this generates a separate chunk (about.[hash].js) for this route
-        // which is lazy-loaded when the route is visited.
         component: () =>
             import(/* webpackChunkName: "about" */ '../views/About.vue'),
     },
