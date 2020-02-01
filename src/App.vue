@@ -4,6 +4,7 @@
             <Sidebar />
             <Titlebar />
             <v-content class="pt-0">
+                <Overlay />
                 <v-container fluid>
                     <router-view />
                 </v-container>
@@ -13,12 +14,14 @@
 </template>
 
 <script>
-import Sidebar from '@/components/Sidebar.vue';
-import Titlebar from '@/components/Titlebar.vue';
+import Sidebar from '@/components/sidebar.vue';
+import Titlebar from '@/components/titlebar.vue';
+import Overlay from '@/components/overlay.vue';
 
 export default {
     name: 'App',
     components: {
+        Overlay,
         Sidebar,
         Titlebar,
     },

@@ -1,7 +1,7 @@
 <template>
     <div>
         <v-app-bar app fixed elevate-on-scroll height="48px">
-            <v-breadcrumbs :items="items">
+            <v-breadcrumbs :items="breadcrumbs">
                 <template v-slot:divider>
                     <v-icon>mdi-chevron-right</v-icon>
                 </template>
@@ -14,29 +14,12 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
+
 export default {
     name: 'Titlebar',
-    data() {
-        return {
-            isMiniMode: true,
-            items: [
-                {
-                    text: 'Dashboard',
-                    disabled: false,
-                    href: 'breadcrumbs_dashboard',
-                },
-                {
-                    text: 'Link 1',
-                    disabled: false,
-                    href: 'breadcrumbs_link_1',
-                },
-                {
-                    text: 'Link 2',
-                    disabled: true,
-                    href: 'breadcrumbs_link_2',
-                },
-            ],
-        };
+    computed: {
+        ...mapState(['breadcrumbs']),
     },
 };
 </script>

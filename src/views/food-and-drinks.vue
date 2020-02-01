@@ -3,7 +3,7 @@
         <v-data-table
             fixed-header
             :headers="headers"
-            :items="items"
+            :items="foodAndDrinks"
             :items-per-page="itemsPerPage"
             :custom-sort="customSort"
             class="elevation-1"
@@ -22,8 +22,13 @@
 </template>
 
 <script>
+import { mapState, mapActions } from 'vuex';
+
 export default {
-    name: 'food-and-drinks',
+    name: 'FoodAndDrinks',
+    async created() {
+        await this.getFoodAndDrinks();
+    },
     data() {
         return {
             itemsPerPage: 20,
@@ -32,41 +37,13 @@ export default {
                 { text: 'Calories', value: 'calories', align: 'left' },
                 { text: 'Category', value: 'category', align: 'left' },
             ],
-            items: [
-                {
-                    id: '1',
-                    name: 'test1',
-                    calories: 100,
-                    category: { id: '1', name: 'pizza' },
-                },
-                {
-                    id: '2',
-                    name: 'test2',
-                    calories: 200,
-                    category: { id: '2', name: 'pasta' },
-                },
-                {
-                    id: '3',
-                    name: 'test3',
-                    calories: 300,
-                    category: { id: '3', name: 'beer' },
-                },
-                {
-                    id: '4',
-                    name: 'test4',
-                    calories: 400,
-                    category: { id: '4', name: 'soup' },
-                },
-                {
-                    id: '5',
-                    name: 'test5',
-                    calories: 500,
-                    category: { id: '5', name: 'dessert' },
-                },
-            ],
         };
     },
+    computed: {
+        ...mapState(['foodAndDrinks']),
+    },
     methods: {
+        ...mapActions(['getFoodAndDrinks']),
         customSort(items, sortBy, sortDesc) {
             items.sort((a, b) => {
                 if (sortBy[0] == 'category') {
