@@ -6,3 +6,4 @@ export const UPDATE_BREADCRUMBS = 'updateBreadcrumbs';
 // FOOD AND DRINKS
 export const GET_FOOD_AND_DRINKS = 'getFoodAndDrinks';
 export const GET_FOOD_AND_DRINKS_DETAILS = 'getFoodAndDrinksDetails';
+export const UPDATE_FOOD_AND_DRINKS_DETAILS = 'updateFoodAndDrinksDetails';

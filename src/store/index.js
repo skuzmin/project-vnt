@@ -7,6 +7,7 @@ import {
     UPDATE_BREADCRUMBS,
     GET_FOOD_AND_DRINKS,
     GET_FOOD_AND_DRINKS_DETAILS,
+    UPDATE_FOOD_AND_DRINKS_DETAILS,
     SET_OVERLAY,
 } from './mutation-types';
 import { service } from '../data-service';
@@ -31,6 +32,9 @@ const mutations = {
         state.isOverlayEnabled = isOverlayEnabled;
     },
     [GET_FOOD_AND_DRINKS_DETAILS](state, foodAndDrinksDetails) {
+        state.foodAndDrinksDetails = foodAndDrinksDetails;
+    },
+    [UPDATE_FOOD_AND_DRINKS_DETAILS](state, foodAndDrinksDetails) {
         state.foodAndDrinksDetails = foodAndDrinksDetails;
     },
     [UPDATE_BREADCRUMBS](state, breadcrumb) {
@@ -68,6 +72,12 @@ const actions = {
             name: 'food-and-drinks-details',
             id: data.id,
         });
+    },
+    async updateFoodAndDrinksDetails({ commit }, data) {
+        commit(SET_OVERLAY, true);
+        await new Promise(resolve => setTimeout(() => resolve(true), 1500));
+        commit(SET_OVERLAY, false);
+        commit(UPDATE_FOOD_AND_DRINKS_DETAILS, data);
     },
 };
 
