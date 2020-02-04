@@ -30,11 +30,11 @@
                                 <v-col cols="10">
                                     <v-select
                                         dense
-                                        :items="categories"
+                                        :items="foodAndDrinksCategories"
                                         label="Category"
                                         item-text="name"
                                         item-value="id"
-                                        v-model="details.category"
+                                        v-model="details.categoryId"
                                     ></v-select>
                                 </v-col>
                             </v-row>
@@ -72,67 +72,33 @@
 
 <script>
 import { cloneDeep, isEqual } from 'lodash';
-import ConfirmationDialog from '@/components/confirmation-dialog.vue';
 import { mapState, mapActions } from 'vuex';
+
+import ConfirmationDialog from '@/components/confirmation-dialog.vue';
+import { foodAndDrinksItemValidation } from '@/shared/mixins';
 
 export default {
     name: 'FoodAndDrinksDetails',
     components: { ConfirmationDialog },
+    mixins: [foodAndDrinksItemValidation],
     data() {
         return {
             valid: true,
             details: {},
-            validationRules: {
-                nameRules: [
-                    v => !!v || 'Name is required',
-                    v =>
-                        (v && v.length <= 20) ||
-                        'Name must be less than 20 characters',
-                ],
-                caloriesRules: [
-                    v => !!v || 'Calories are required',
-                    v => (v && !isNaN(v)) || 'Calories must be a number',
-                ],
-                descriptionRules: [
-                    v =>
-                        (v && v.length <= 500) ||
-                        'Name must be less than 500 characters',
-                ],
-            },
-            categories: [
-                {
-                    id: '1',
-                    name: 'pizza',
-                },
-                {
-                    id: '2',
-                    name: 'pasta',
-                },
-                {
-                    id: '3',
-                    name: 'beer',
-                },
-                {
-                    id: '4',
-                    name: 'soup',
-                },
-                {
-                    id: '5',
-                    name: 'dessert',
-                },
-            ],
         };
     },
     async created() {
         await this.getFoodAndDrinksDetails(this.$route.params.id);
+        await this.getFoodAndDrinksCategories();
         this.details = cloneDeep(this.foodAndDrinksDetails);
     },
     computed: {
-        ...mapState(['foodAndDrinksDetails']),
+        ...mapState(['foodAndDrinksDetails', 'foodAndDrinksCategories']),
     },
     methods: {
         ...mapActions([
             'getFoodAndDrinksDetails',
+            'getFoodAndDrinksCategories',
             'updateFoodAndDrinksDetails',
         ]),
         async update() {

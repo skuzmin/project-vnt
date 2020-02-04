@@ -8,13 +8,19 @@
             :custom-sort="customSort"
             class="elevation-1"
         >
+            <template v-slot:top>
+                <v-toolbar flat color="white">
+                    <v-spacer></v-spacer>
+                    <FoodAndDrinksDialog />
+                </v-toolbar>
+            </template>
             <template v-slot:item="{ item }">
                 <tr class="text-left">
                     <router-link :to="`/food-and-drinks/${item.id}`" tag="td" class="link">
                         <a>{{ item.name }}</a>
                     </router-link>
                     <td>{{ item.calories }}</td>
-                    <td>{{ item.category.name }}</td>
+                    <td>{{ getCategoryName(item.categoryId) }}</td>
                 </tr>
             </template>
         </v-data-table>
@@ -24,10 +30,14 @@
 <script>
 import { mapState, mapActions } from 'vuex';
 
+import FoodAndDrinksDialog from '@/views/food-and-drinks-dialog';
+
 export default {
     name: 'FoodAndDrinks',
+    components: { FoodAndDrinksDialog },
     async created() {
         await this.getFoodAndDrinks();
+        await this.getFoodAndDrinksCategories();
     },
     data() {
         return {
@@ -40,10 +50,16 @@ export default {
         };
     },
     computed: {
-        ...mapState(['foodAndDrinks']),
+        ...mapState(['foodAndDrinks', 'foodAndDrinksCategories']),
     },
     methods: {
-        ...mapActions(['getFoodAndDrinks']),
+        ...mapActions(['getFoodAndDrinks', 'getFoodAndDrinksCategories']),
+        getCategoryName(id) {
+            const category = this.foodAndDrinksCategories.find(
+                i => i.id === id,
+            );
+            return (category && category.name) || 'N/A';
+        },
         customSort(items, sortBy, sortDesc) {
             items.sort((a, b) => {
                 if (sortBy[0] == 'category') {

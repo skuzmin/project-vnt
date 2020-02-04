@@ -1,6 +1,6 @@
 <template>
     <div>
-        <v-dialog v-model="isOpen" max-width="350">
+        <v-dialog v-model="isOpen" persistent max-width="350">
             <v-card>
                 <v-card-title class="headline">
                     {{ options.title }}

@@ -8,6 +8,8 @@ import {
     GET_FOOD_AND_DRINKS,
     GET_FOOD_AND_DRINKS_DETAILS,
     UPDATE_FOOD_AND_DRINKS_DETAILS,
+    CREATE_FOOD_AND_DRINKS,
+    GET_FOOD_AND_DRINKS_CATEGORIES,
     SET_OVERLAY,
 } from './mutation-types';
 import { service } from '../data-service';
@@ -17,6 +19,7 @@ Vue.use(Vuex);
 const state = {
     isOverlayEnabled: false,
     breadcrumbs: [],
+    foodAndDrinksCategories: [],
     foodAndDrinks: [],
     foodAndDrinksDetails: {},
 };
@@ -28,11 +31,17 @@ const mutations = {
     [GET_FOOD_AND_DRINKS](state, foodAndDrinks) {
         state.foodAndDrinks = foodAndDrinks;
     },
+    [GET_FOOD_AND_DRINKS_CATEGORIES](state, foodAndDrinksCategories) {
+        state.foodAndDrinksCategories = foodAndDrinksCategories;
+    },
     [SET_OVERLAY](state, isOverlayEnabled) {
         state.isOverlayEnabled = isOverlayEnabled;
     },
     [GET_FOOD_AND_DRINKS_DETAILS](state, foodAndDrinksDetails) {
         state.foodAndDrinksDetails = foodAndDrinksDetails;
+    },
+    [CREATE_FOOD_AND_DRINKS](state, foodAndDrinksDetails) {
+        state.foodAndDrinks.push(foodAndDrinksDetails);
     },
     [UPDATE_FOOD_AND_DRINKS_DETAILS](state, foodAndDrinksDetails) {
         state.foodAndDrinksDetails = foodAndDrinksDetails;
@@ -61,6 +70,15 @@ const actions = {
         const data = await service.getFoodAndDrinks();
         commit(SET_OVERLAY, false);
         commit(GET_FOOD_AND_DRINKS, data);
+    },
+    async getFoodAndDrinksCategories({ commit }) {
+        const data = await service.getFoodAndCategories();
+        commit(GET_FOOD_AND_DRINKS_CATEGORIES, data);
+    },
+    async createFoodAndDrinks({ commit }, newItem) {
+        const data = await service.createFoodAndDrinks(newItem);
+        commit(CREATE_FOOD_AND_DRINKS, data);
+        return data;
     },
     async getFoodAndDrinksDetails({ commit }, id) {
         commit(SET_OVERLAY, true);

@@ -4,49 +4,34 @@
         "name": "test1",
         "calories": 100,
         "description": "Some very long and detailed text...",
-        "category": {
-            "id": "1",
-            "name": "pizza"
-        }
+        "categoryId": "1"
     },
     {
         "id": "2",
         "name": "test2",
         "calories": 200,
         "description": "Some very long and detailed text...",
-        "category": {
-            "id": "2",
-            "name": "pasta"
-        }
+        "categoryId": "2"
     },
     {
         "id": "3",
         "name": "test3",
         "calories": 300,
         "description": "Some very long and detailed text...",
-        "category": {
-            "id": "3",
-            "name": "beer"
-        }
+        "categoryId": "3"
     },
     {
         "id": "4",
         "name": "test4",
         "calories": 400,
         "description": "Some very long and detailed text...",
-        "category": {
-            "id": "4",
-            "name": "soup"
-        }
+        "categoryId": "4"
     },
     {
         "id": "5",
         "name": "test5",
         "calories": 500,
         "description": "Some very long and detailed text...",
-        "category": {
-            "id": "5",
-            "name": "dessert"
-        }
+        "categoryId": "5"
     }
 ]

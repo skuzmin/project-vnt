@@ -7,3 +7,5 @@ export const UPDATE_BREADCRUMBS = 'updateBreadcrumbs';
 export const GET_FOOD_AND_DRINKS = 'getFoodAndDrinks';
 export const GET_FOOD_AND_DRINKS_DETAILS = 'getFoodAndDrinksDetails';
 export const UPDATE_FOOD_AND_DRINKS_DETAILS = 'updateFoodAndDrinksDetails';
+export const CREATE_FOOD_AND_DRINKS = 'createFoodAndDrinks';
+export const GET_FOOD_AND_DRINKS_CATEGORIES = 'getFoodAndDrinksCategories';
